@@ -15,8 +15,8 @@ class SQSPoller:
     def __init__(self, options):
         self.options = options
         self.sqs_client = boto3.client('sqs')
-        config.load_kube_config()
-        # config.load_incluster_config()
+        # config.load_kube_config()
+        config.load_incluster_config()
         self.apps_v1 = client.AppsV1Api()
         self.last_scale_up_time = time()
         self.last_scale_down_time = time()
