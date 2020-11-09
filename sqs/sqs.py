@@ -70,17 +70,16 @@ class SQSPoller:
             logger.info("Min pods reached")
 
     def deployment(self):
-        logger.debug("loading deployment: {} from namespace: {}".format(
-            self.options.kubernetes_deployment, self.options.kubernetes_namespace))
         deployments = self.apps_v1.list_namespaced_deployment(
-            self.options.kubernetes_namespace, label_selector="app={}".format(self.options.kubernetes_deployment2))
-        logger.debug(deployments.items[0])
+            self.options.kubernetes_namespace, label_selector="app={}".format(self.options.label_selector))
+        logger.debug("loading deployment: {} from namespace: {}".format(
+            deployments.items[0].metadata.name, self.options.kubernetes_namespace))
         return deployments.items[0]
 
     def update_deployment(self, deployment):
         # Update the deployment
         api_response = self.apps_v1.patch_namespaced_deployment(
-            name=self.options.kubernetes_deployment,
+            name=deployment.metadata.name,
             namespace=self.options.kubernetes_namespace,
             body=deployment)
         logger.debug("Deployment updated. status='%s'" %

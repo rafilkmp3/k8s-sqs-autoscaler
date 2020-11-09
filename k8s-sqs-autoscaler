@@ -10,11 +10,8 @@ if __name__ == '__main__':
     parser.add_option("--sqs-queue-url",
                       dest="sqs_queue_url",
                       help="SQS Queue URL")
-    parser.add_option("--kubernetes-deployment",
-                      dest="kubernetes_deployment",
-                      help="")
-    parser.add_option("--kubernetes-deployment2",
-                      dest="kubernetes_deployment2",
+    parser.add_option("--label-selector",
+                      dest="label_selector",
                       help="")
     parser.add_option("--kubernetes-namespace",
                       dest="kubernetes_namespace",
@@ -62,13 +59,13 @@ if __name__ == '__main__':
 
     if not options.sqs_queue_url:
         parser.error('SQS_QUEUE_URL not given')
-    if not options.kubernetes_deployment:
+    if not options.label_selector:
         parser.error('KUBERNETES_DEPLOYMENT not given')
     if not options.aws_region:
         parser.error('AWS_REGION not given')
     if not options.kubernetes_namespace:
         parser.error('KUBERNETES_NAMESPACE not given')
-    if not options.kubernetes_deployment:
+    if not options.label_selector:
         parser.error('KUBERNETES_DEPLOYMENT not given')
     logger.debug(options)
     sqs.run(options)
