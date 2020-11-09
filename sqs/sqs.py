@@ -73,6 +73,7 @@ class SQSPoller:
             self.options.kubernetes_deployment, self.options.kubernetes_namespace))
         deployments = self.apps_v1.list_namespaced_deployment(
             self.options.kubernetes_namespace, label_selector="app={}".format(self.options.kubernetes_deployment))
+        logger.debug(deployments)
         return deployments.items[0]
 
     def update_deployment(self, deployment):
