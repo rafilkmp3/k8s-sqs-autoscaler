@@ -15,7 +15,8 @@ class SQSPoller:
     def __init__(self, options):
         self.options = options
         self.sqs_client = boto3.client('sqs')
-        config.load_incluster_config()
+        config.load_kube_config()
+        # config.load_incluster_config()
         self.apps_v1 = client.AppsV1Api()
         self.last_scale_up_time = time()
         self.last_scale_down_time = time()
@@ -72,8 +73,8 @@ class SQSPoller:
         logger.debug("loading deployment: {} from namespace: {}".format(
             self.options.kubernetes_deployment, self.options.kubernetes_namespace))
         deployments = self.apps_v1.list_namespaced_deployment(
-            self.options.kubernetes_namespace, label_selector="app={}".format(self.options.kubernetes_deployment))
-        logger.debug(deployments)
+            self.options.kubernetes_namespace, label_selector="app={}".format(self.options.kubernetes_deployment2))
+        logger.debug(deployments.items[0])
         return deployments.items[0]
 
     def update_deployment(self, deployment):
@@ -88,7 +89,7 @@ class SQSPoller:
     def run(self):
         options = self.options
         logger.debug("Starting poll for {} every {}s".format(
-            options.sqs_queue_url, options.poll_period))
+            options.sqs_queue_url, options.poll_period,))
         while True:
             self.poll()
 

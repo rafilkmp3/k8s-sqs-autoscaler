@@ -13,6 +13,9 @@ if __name__ == '__main__':
     parser.add_option("--kubernetes-deployment",
                       dest="kubernetes_deployment",
                       help="")
+    parser.add_option("--kubernetes-deployment2",
+                      dest="kubernetes_deployment2",
+                      help="")
     parser.add_option("--kubernetes-namespace",
                       dest="kubernetes_namespace",
                       help="")
