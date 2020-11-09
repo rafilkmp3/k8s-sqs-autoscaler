@@ -1,6 +1,6 @@
-ORG=sideshowbandana
+ORG=rafilkmp3
 PROJ=k8s-sqs-autoscaler
-VERSION=1.0.1
+VERSION=1.0.0
 
 .PHONY=release
 release:

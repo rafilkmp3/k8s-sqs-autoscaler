@@ -25,7 +25,7 @@ spec:
         command:
           - ./k8s-sqs-autoscaler
           - --sqs-queue-url=https://sqs.$(AWS_REGION).amazonaws.com/$(AWS_ID)/$(SQS_QUEUE) # required
-          - --kubernetes-deployment=$(KUBERNETES_DEPLOYMENT)
+          - --label-selector=$(DEPLOYMENT_SELECTOR)
           - --kubernetes-namespace=$(K8S_NAMESPACE) # optional
           - --poll-period=10 # optional
           - --scale-down-cool-down=30 # optional
