@@ -66,6 +66,6 @@ if __name__ == '__main__':
     if not options.kubernetes_namespace:
         parser.error('KUBERNETES_NAMESPACE not given')
     if not options.label_selector:
-        parser.error('KUBERNETES_DEPLOYMENT not given')
+        parser.error('LABEL_SELECTOR not given')
     logger.debug(options)
     sqs.run(options)
